@@ -1,0 +1,35 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!--call in the css for main page-->
+    <title>Blog Page</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+
+<body>
+    <!--add image to background-->
+    <div id="glitter"></div>
+        <!--add blog title & post button-->
+        <h1>Welcome to The Blog!</h1>
+        <a href="/post"><button>Create New Post</button></a>
+       
+        <div class="category-options">
+        <% posts.forEach(post => { %>
+            <!--display title, category, and content for each post via loop-->
+            <article>
+                <h2><%= post.title %></h2>
+                <p class="category">Category: <%= post.category || 'None' %></p>
+                <p><%= post.content %></p>
+                <!--add update and delete buttons for each post-->
+                <form method="POST" action="/delete/<%= post.id %>" style="display:inline;">
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
+                <a href="/post/<%= post.id %>">
+                    <button type="button" class="update-button">Edit</button></a>
+            </article>
+        <% }) %>
+        </div>
+</body>
+</html>
